@@ -42,4 +42,15 @@
         app:layout_constraintStart_toEndOf="@+id/resetButton"
         app:layout_constraintTop_toTopOf="@+id/resetButton" />
 
+    <ImageButton
+        android:id="@+id/powerServiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/disk"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_power_settings_new_24"
+        android:layout_margin="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
