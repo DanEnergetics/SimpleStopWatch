@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import android.os.Handler;
 
-public final class Stopwatch {
+import java.util.Locale;
+import java.util.Objects;
 
-    public interface OnStateChangedListener {
-        void onChanged(State newState);
-    }
+public final class Stopwatch {
 
     public enum State {
         ZERO,
@@ -19,18 +18,18 @@ public final class Stopwatch {
     private static Stopwatch INSTANCE;
 
     // private State state = State.ZERO;
-    private MutableLiveData<State> state = new MutableLiveData<>(State.ZERO);
+    private final MutableLiveData<State> state = new MutableLiveData<>(State.ZERO);
 
     private long startTime = 0;
-    private long savedTime = 0;
+    private long savedTime;
 
-    private MutableLiveData<String> formattedTime = new MutableLiveData<>();
+    private final MutableLiveData<String> formattedTime = new MutableLiveData<>();
 
     private Stopwatch() {
         savedTime = 0;
     }
 
-    public static Stopwatch getInstance() {
+    public static synchronized Stopwatch getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Stopwatch();
         }
@@ -51,7 +50,7 @@ public final class Stopwatch {
     }
 
     public void startOrPause() {
-        switch (state.getValue()) {
+        switch (Objects.requireNonNull(state.getValue())) {
             case RUNNING:
                 pause();
                 break;
@@ -72,9 +71,9 @@ public final class Stopwatch {
         handler.removeCallbacks(updateNotificationTimer);
     }
 
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
-    private Runnable updateNotificationTimer = new Runnable() {
+    private final Runnable updateNotificationTimer = new Runnable() {
         @Override
         public void run() {
             formattedTime.postValue(getElapsedFormattedTime());
@@ -94,7 +93,7 @@ public final class Stopwatch {
         int hours = minutes / 60;
         seconds %= 60;
         minutes %= 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
     }
 
     public MutableLiveData<String> getFormattedTime() {
