@@ -3,4 +3,8 @@
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="reset">Reset</string>
+    <string name="notification_title">Simple Stopwatch</string>
+    <string name="notification_message">Stopwatch is running.</string>
+    <string name="notification_channel_name">SimpleStopwatch notification channel</string>
+    <string name="notification_channel_description">Channel for notifications about foreground processes</string>
 </resources>

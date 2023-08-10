@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top|start"
     android:focusable="false"
-    android:paddingHorizontal="5dp"
-    android:text="00:00:00"
-    android:textSize="24sp"
+    android:paddingHorizontal="16dp"
+    android:text="00:00:07"
+    android:textSize="32sp"
     android:background="@drawable/overlay_background"
     android:textColor="@color/white"
     >

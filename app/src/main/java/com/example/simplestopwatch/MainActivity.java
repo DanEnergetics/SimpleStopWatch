@@ -1,6 +1,7 @@
 package com.example.simplestopwatch;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean startStopwatchService() {
         Intent intent = new Intent(this, StopwatchService.class);
         intent.setAction("START_STOPWATCH");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return startForegroundService(intent) != null;
+        }
         return startService(intent) != null;
     }
 
